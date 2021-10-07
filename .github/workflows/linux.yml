@@ -1,0 +1,22 @@
+name: CSI2115 Linux kernel
+
+on:
+  push:
+    branches: [ main, origin, master, csi2115-f21 ]
+    paths:
+      - 'linux/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: true
+      - name: Tinyconfig
+        run: |
+          ./install-deps.sh;
+          linux_hash=$(git rev-parse HEAD:linux)
+          wget https://github.com/BaeRoNuI/linux/archive/$linux_hash.zip
+          unzip -q $linux_hash.zip;
+          ./build-linux.sh ./linux-$linux_hash tinyconfig;

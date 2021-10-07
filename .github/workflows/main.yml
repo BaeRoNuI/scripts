@@ -1,9 +1,6 @@
 name: CSI2115 Linux kernel
 
-on:
-  push:
-  path:
-    - 'linux/*'
+on: [push]
 
 env:
   BUILD_TYPE: Debug
@@ -15,7 +12,9 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: compile the linux
+    - name: Install Dependencies
       shell: bash
       run: |
-        ./build-linux.sh ./linux tinyconfig
+        ./install-deps.sh
+
+This is a basic workflow to help you get started with Actions
