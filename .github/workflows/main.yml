@@ -1,6 +1,9 @@
 name: CSI2115 Linux kernel
 
-on: [push]
+on:
+  push:
+    path:
+      - 'linux/*'
 
 env:
   BUILD_TYPE: Debug
@@ -12,7 +15,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Install Dependencies
+    - name: compile the linux
       shell: bash
       run: |
-        ./install-deps.sh
+        ./build-linux.sh ./linux tinyconfig
