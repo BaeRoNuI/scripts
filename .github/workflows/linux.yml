@@ -1,16 +1,32 @@
-name: CSI2115 Linux kernel
+name: linux
 
 on:
   push:
     paths:
-      - 'linux/**'
+      - 'linux'
 
 jobs:
   build:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-20.4
+    
     steps:
-      - uses: actions/checkout@v2
-        with:
-          submodules: true
-      - name: Tinyconfig
-        run: ./install-deps.sh;linux_hash=$(git rev-parse HEAD:linux);./build-linux.sh ./linux-$linux_hash tinyconfig;
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    
+    - name: Get hash
+      id: ronaronatangtang
+      run: linuxHash = $(git rev-parse HEAD:linux)
+      
+    - name: Download Linux
+      run:
+        wget -O myLinux https://github.com/BaeRoNuI/linux/archive/${linuxHash}.zip
+      
+    - name: Unzip Linux
+      run: unzip myLinux
+      
+    - name: Install dephs
+      run: ./install-deps.sh
+      
+    - name: Build Linux with tinyconfig
+      run: ./build-linux.sh linux-${{steps.vars.outputs.linux_commit}} tinyconfig
