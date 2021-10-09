@@ -16,7 +16,7 @@ jobs:
     
     - name: Get hash
       id: ronaronatangtang
-      run: linuxHash = $(git rev-parse HEAD:linux)
+      run: linuxHash=$(git rev-parse HEAD:linux)
       
     - name: Download Linux
       run:
