@@ -14,12 +14,10 @@ jobs:
       with:
         submodules: true
     
-    - name: Get hash
+    - name: Get Linux
       id: ronaronatangtang
-      run: linuxHash=$(git rev-parse HEAD:linux)
-      
-    - name: Download Linux
-      run:
+      run: |
+        linuxHash=$(git rev-parse HEAD:linux)
         wget -O myLinux https://github.com/BaeRoNuI/linux/archive/${linuxHash}.zip
       
     - name: Unzip Linux
@@ -29,4 +27,4 @@ jobs:
       run: ./install-deps.sh
       
     - name: Build Linux with tinyconfig
-      run: ./build-linux.sh linux-${linuxHash} tinyconfig
+      run: ./build-linux.sh myLinux tinyconfig
