@@ -29,4 +29,4 @@ jobs:
     - name: Build Linux with tinyconfig
       run: |
         linuxHash=$(git rev-parse HEAD:linux)
-        ./build-linux.sh myLinux-${liniuxHash} tinyconfig
+        ./build-linux.sh Linux-${linuxHash} tinyconfig
