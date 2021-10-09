@@ -27,4 +27,6 @@ jobs:
       run: ./install-deps.sh
       
     - name: Build Linux with tinyconfig
-      run: ./build-linux.sh myLinux tinyconfig
+      run: |
+      linuxHash=$(git rev-parse HEAD:linux)
+      ./build-linux.sh myLinux-${liniuxHash} tinyconfig
